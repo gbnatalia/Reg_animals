@@ -1,0 +1,197 @@
+1. Используя команду cat в терминале операционной системы Linux, создать
+два фаи?ла Домашние животные (заполнив файл собаками, кошками,
+хомяками) и Вьючные животными заполнив файл Лошадьми, верблюдами и
+ослы), а затем объединить их. Просмотреть содержимое созданного фаи?ла.
+Переименовать фаи?л, дав ему новое имя (Друзья человека).
+2. Создать директорию, переместить файл туда.
+==========================================================================
+user@user-VirtualBox:~/itogi$ cat > h_animals
+кошка, мурка, 2
+кошка, вася, 4
+собака, шарик, 5
+хомяк, петя, 1
+^C
+user@user-VirtualBox:~/itogi$ cat h_animals
+кошка, мурка, 2
+кошка, вася, 4
+собака, шарик, 5
+хомяк, петя, 1
+
+user@user-VirtualBox:~/itogi$ cat > v_animals
+лошадь, сокол, 7
+верблюд, рыжик, 8
+осел, серый, 3
+лошадь, ястреб, 10
+^C
+user@user-VirtualBox:~/itogi$ cat v_animals
+лошадь, сокол, 7
+верблюд, рыжик, 8
+осел, серый, 3
+лошадь, ястреб, 10
+user@user-VirtualBox:~/itogi$
+
+user@user-VirtualBox:~/itogi$ cat h_animals v_animals > animals
+user@user-VirtualBox:~/itogi$ cat animals
+кошка, мурка, 2
+кошка, вася, 4
+собака, шарик, 5
+хомяк, петя, 1
+лошадь, сокол, 7
+верблюд, рыжик, 8
+осел, серый, 3
+лошадь, ястреб, 10
+user@user-VirtualBox:~/itogi$
+
+
+user@user-VirtualBox:~/itogi$ mkdir animals
+mkdir: cannot create directory ‘animals’: File exists
+user@user-VirtualBox:~/itogi$ mkdir all_animals
+user@user-VirtualBox:~/itogi$ mv animals all_animals/animals
+user@user-VirtualBox:~/itogi$ cd all_animals
+user@user-VirtualBox:~/itogi/all_animals$ ls
+animals
+user@user-VirtualBox:~/itogi/all_animals$ cat animals
+кошка, мурка, 2
+кошка, вася, 4
+собака, шарик, 5
+хомяк, петя, 1
+лошадь, сокол, 7
+верблюд, рыжик, 8
+осел, серый, 3
+лошадь, ястреб, 10
+
+=======================================================================
+3. Подключить дополнительный репозиторий MySQL. Установить любой пакет из этого репозитория
+========================================================================
+user@user-VirtualBox:~/itogi/all_animals$ sudo add-apt-repository 'deb http://repo.mysql.com/apt/ubuntu/ bionic mysql-8.0'
+Repository: 'deb http://repo.mysql.com/apt/ubuntu/ bionic mysql-8.0'
+Description:
+Archive for codename: bionic components: mysql-8.0
+More info: http://repo.mysql.com/apt/ubuntu/
+Adding repository.
+Press [ENTER] to continue or Ctrl-c to cancel.
+Adding deb entry to /etc/apt/sources.list.d/archive_uri-http_repo_mysql_com_apt_ubuntu_-jammy.list
+Adding disabled deb-src entry to /etc/apt/sources.list.d/archive_uri-http_repo_mysql_com_apt_ubuntu_-jammy.list
+Hit:1 http://ru.archive.ubuntu.com/ubuntu jammy InRelease
+Get:2 http://ru.archive.ubuntu.com/ubuntu jammy-updates InRelease [119 kB]
+Get:3 http://repo.mysql.com/apt/ubuntu bionic InRelease [20,0 kB]
+Hit:4 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Get:5 http://ru.archive.ubuntu.com/ubuntu jammy-backports InRelease [107 kB]
+Err:3 http://repo.mysql.com/apt/ubuntu bionic InRelease
+  The following signatures couldn't be verified because the public key is not available: NO_PUBKEY 467B942D3A79BD29
+Get:6 http://ru.archive.ubuntu.com/ubuntu jammy-updates/main i386 Packages [458 kB]
+Get:7 http://ru.archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [948 kB]
+Get:8 http://ru.archive.ubuntu.com/ubuntu jammy-updates/universe i386 Packages [605 kB]
+Get:9 http://ru.archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [890 kB]
+Reading package lists... Done
+W: GPG error: http://repo.mysql.com/apt/ubuntu bionic InRelease: The following signatures couldn't be verified because the public key is not available: NO_PUBKEY 467B942D3A79BD29
+E: The repository 'http://repo.mysql.com/apt/ubuntu bionic InRelease' is not signed.
+N: Updating from such a repository can't be done securely, and is therefore disabled by default.
+N: See apt-secure(8) manpage for repository creation and user configuration details.
+user@user-VirtualBox:~/itogi/all_animals$  sudo add-apt-repository 'deb http://repo.mysql.com/apt/ubuntu/ bionic mysql-8.0'
+Repository: 'deb http://repo.mysql.com/apt/ubuntu/ bionic mysql-8.0'
+Description:
+Archive for codename: bionic components: mysql-8.0
+More info: http://repo.mysql.com/apt/ubuntu/
+Adding repository.
+Press [ENTER] to continue or Ctrl-c to cancel.
+Found existing deb entry in /etc/apt/sources.list.d/archive_uri-http_repo_mysql_com_apt_ubuntu_-jammy.list
+Adding deb entry to /etc/apt/sources.list.d/archive_uri-http_repo_mysql_com_apt_ubuntu_-jammy.list
+Found existing deb-src entry in /etc/apt/sources.list.d/archive_uri-http_repo_mysql_com_apt_ubuntu_-jammy.list
+Adding disabled deb-src entry to /etc/apt/sources.list.d/archive_uri-http_repo_mysql_com_apt_ubuntu_-jammy.list
+Hit:1 http://ru.archive.ubuntu.com/ubuntu jammy InRelease
+Hit:2 http://ru.archive.ubuntu.com/ubuntu jammy-updates InRelease
+Get:3 http://ru.archive.ubuntu.com/ubuntu jammy-backports InRelease [107 kB]
+Get:4 http://repo.mysql.com/apt/ubuntu bionic InRelease [20,0 kB]
+Hit:5 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Err:4 http://repo.mysql.com/apt/ubuntu bionic InRelease
+  The following signatures couldn't be verified because the public key is not available: NO_PUBKEY 467B942D3A79BD29
+Reading package lists... Done
+W: GPG error: http://repo.mysql.com/apt/ubuntu bionic InRelease: The following signatures couldn't be verified because the public key is not available: NO_PUBKEY 467B942D3A79BD29
+E: The repository 'http://repo.mysql.com/apt/ubuntu bionic InRelease' is not signed.
+N: Updating from such a repository can't be done securely, and is therefore disabled by default.
+N: See apt-secure(8) manpage for repository creation and user configuration details.
+user@user-VirtualBox:~/itogi/all_animals$ sudo apt update
+Hit:1 http://ru.archive.ubuntu.com/ubuntu jammy InRelease
+Hit:2 http://ru.archive.ubuntu.com/ubuntu jammy-updates InRelease
+Get:3 http://repo.mysql.com/apt/ubuntu bionic InRelease [20,0 kB]
+Get:4 http://ru.archive.ubuntu.com/ubuntu jammy-backports InRelease [107 kB]
+Hit:5 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Err:3 http://repo.mysql.com/apt/ubuntu bionic InRelease
+  The following signatures couldn't be verified because the public key is not available: NO_PUBKEY 467B942D3A79BD29
+Reading package lists... Done
+W: GPG error: http://repo.mysql.com/apt/ubuntu bionic InRelease: The following signatures couldn't be verified because the public key is not available: NO_PUBKEY 467B942D3A79BD29
+E: The repository 'http://repo.mysql.com/apt/ubuntu bionic InRelease' is not signed.
+N: Updating from such a repository can't be done securely, and is therefore disabled by default.
+N: See apt-secure(8) manpage for repository creation and user configuration details.
+user@user-VirtualBox:~/itogi/all_animals$ sudo apt install mysql-client-8.0
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+mysql-client-8.0 is already the newest version (8.0.32-0ubuntu0.22.04.2).
+mysql-client-8.0 set to manually installed.
+The following packages were automatically installed and are no longer required:
+  dbconfig-common dbconfig-mysql icc-profiles-free javascript-common libjs-bootstrap4 libjs-codemirror
+  libjs-jquery libjs-jquery-mousewheel libjs-jquery-timepicker libjs-jquery-ui libjs-popper.js
+  libjs-sizzle libjs-sphinxdoc libjs-underscore libonig5 libzip4 node-jquery php-bz2 php-curl php-gd
+  php-google-recaptcha php-json php-mariadb-mysql-kbs php-mbstring php-mysql php-nikic-fast-route
+  php-phpmyadmin-motranslator php-phpmyadmin-shapefile php-phpmyadmin-sql-parser php-phpseclib
+  php-psr-cache php-psr-container php-psr-log php-symfony-cache php-symfony-cache-contracts
+  php-symfony-config php-symfony-dependency-injection php-symfony-deprecation-contracts
+  php-symfony-expression-language php-symfony-filesystem php-symfony-polyfill-php80
+  php-symfony-polyfill-php81 php-symfony-service-contracts php-symfony-var-exporter php-tcpdf php-twig
+  php-twig-i18n-extension php-xml php-zip php8.1-bz2 php8.1-curl php8.1-gd php8.1-mbstring
+  php8.1-mysql php8.1-xml php8.1-zip
+Use 'sudo apt autoremove' to remove them.
+0 upgraded, 0 newly installed, 0 to remove and 302 not upgraded.
+user@user-VirtualBox:~/itogi/all_animals$
+
+=======================================================================
+4. Установить и удалить deb-пакет с помощью dpkg.
+=======================================================================
+
+user@user-VirtualBox:~/itogi/all_animals$ apt download tree
+Get:1 http://ru.archive.ubuntu.com/ubuntu jammy/universe amd64 tree amd64 2.0.2-1 [47,9 kB]
+Fetched 47,9 kB in 0s (292 kB/s)
+user@user-VirtualBox:~/itogi/all_animals$ ls
+animals  tree_2.0.2-1_amd64.deb
+user@user-VirtualBox:~/itogi/all_animals$ sudo dpkg -i tree_2.0.2-1_amd64.deb
+Selecting previously unselected package tree.
+(Reading database ... 218574 files and directories currently installed.)
+Preparing to unpack tree_2.0.2-1_amd64.deb ...
+Unpacking tree (2.0.2-1) ...
+Setting up tree (2.0.2-1) ...
+Processing triggers for man-db (2.10.2-1) ...
+user@user-VirtualBox:~/itogi/all_animals$ dpkg -l | grep tree
+ii  libhtml-tree-perl                          5.07-2                                  all          Perl module to represent and create HTML syntax trees
+ii  libxml-twig-perl                           1:3.52-1                                all          Perl module for processing huge XML documents in tree mode
+ii  libxml-xpathengine-perl                    0.14-1                                  all          re-usable XPath engine for DOM-like trees
+ii  tree                                       2.0.2-1                                 amd64        displays an indented directory tree, in color
+user@user-VirtualBox:~/itogi/all_animals$ sudo dpkg -r tree
+(Reading database ... 218582 files and directories currently installed.)
+Removing tree (2.0.2-1) ...
+Processing triggers for man-db (2.10.2-1) ...
+user@user-VirtualBox:~/itogi/all_animals$ dpkg -l | grep tree
+ii  libhtml-tree-perl                          5.07-2                                  all          Perl module to represent and create HTML syntax trees
+ii  libxml-twig-perl                           1:3.52-1                                all          Perl module for processing huge XML documents in tree mode
+ii  libxml-xpathengine-perl                    0.14-1                                  all          re-usable XPath engine for DOM-like trees
+user@user-VirtualBox:~/itogi/all_animals$
+
+
+=======================================================================
+5. Выложить историю команд в терминале ubuntu
+
+=======================================================================
+
+user@user-VirtualBox:~/itogi/all_animals$ history | tail
+ 2042  apt download tree
+ 2043  ls
+ 2044  sudo dpkg -i tree_2.0.2-1_amd64.deb
+ 2045  dpkg -l | grep tree
+ 2046  sudo dpkg -r tree
+ 2047*
+ 2048  clear
+ 2049  history
+ 2050  history | tail - 10
+ 2051  history | tail
+
