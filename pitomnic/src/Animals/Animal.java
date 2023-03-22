@@ -50,7 +50,9 @@ public class Animal {
     // Выводит список команд животного
     public void printCommands() {
         for (int i = 0; i < commands.size(); i++) {
-            System.out.println(this.commands.get(i));
+            if (i != 0)
+                System.out.print(", ");
+            System.out.print(this.commands.get(i));
         }
     }
 

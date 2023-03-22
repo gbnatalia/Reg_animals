@@ -19,10 +19,23 @@ try и/или ресурс остался открыт. Значение счи�
 import Animals.Animal;
 import Animals.Counter;
 
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class AnimalRegistry {
+
+    private static boolean isValidIndex(int index, Counter counter) {
+        if ((index >= 0) && (index < counter.value())) {
+            return true;
+        } else {
+            System.out.println("Ошибка: животное с таким номером не найдено.");
+            System.out.print("Всего зарегистрировано ");
+            System.out.print(counter.value());
+            System.out.println(" животных");
+            return false;
+        }
+    }
 
     public static void main(String[] args) {
 
@@ -32,14 +45,15 @@ public class AnimalRegistry {
         Counter counter = new Counter();
 
         // Создаем пустой массив для хранения животных
-        Animal[] animals = new Animal[10];
+        List<Animal> animals = new ArrayList<>();
 
         // Запускаем бесконечный цикл меню
         while (true) {
 
             System.out.println("=== Регистрация домашних животных ===");
+            System.out.println("0. Вывести текущий список животных");
             System.out.println("1. Завести новое животное");
-            System.out.println("2. Определить животное в правильный класс");
+            System.out.println("2. Вывести вид животного");
             System.out.println("3. Увидеть список команд, которые выполняет животное");
             System.out.println("4. Обучить животное новым командам");
             System.out.println("5. Выйти из программы");
@@ -48,6 +62,26 @@ public class AnimalRegistry {
             int choice = Integer.parseInt(scanner.nextLine());
 
             switch (choice) {
+                case 0: {
+                    System.out.println("==========================");
+                    System.out.println("Текущий реестр животных:");
+                    System.out.println("==========================");
+
+                    for (int i = 0; i < counter.value(); i++) {
+                        System.out.print(i);
+                        System.out.print(" : ");
+                        System.out.print(animals.get(i).getName());
+                        System.out.print(" : ");
+                        System.out.print(animals.get(i).getSpecies());
+                        System.out.print(" : ");
+                        System.out.print(animals.get(i).getAge());
+                        System.out.print(" : ");
+                        animals.get(i).printCommands();
+                        System.out.println(" : ");
+                    }
+                    break;
+                }
+
                 case 1:
                     try {
 
@@ -61,61 +95,60 @@ public class AnimalRegistry {
                         System.out.print("Введите возраст животного: ");
                         int age = Integer.parseInt(scanner.nextLine());
 
-                        Animal animal = new Animal(name, species, age);
-                        animals[counter.value()] = animal;
+                        animals.add(new Animal(name, species, age));
 
                         // Увеличиваем счетчик на 1 при успешном заведении нового животного
                         counter.add();
 
                         System.out.println("Животное успешно зарегистрировано!");
 
-                    } catch (IllegalStateException e) {
-
+                    } catch (Exception e) {
                         System.out.println("Ошибка: " + e.getMessage());
-
                     }
                     break;
 
                 case 2:
-
-                    System.out.print("Введите номер животного, чтобы определить его вид: ");
-                    int index = Integer.parseInt(scanner.nextLine());
-
-                    if (animals[index] != null) {
-                        System.out.println("Вид животного: " + animals[index].getSpecies());
-                    } else {
-                        System.out.println("Ошибка: животное с таким номером не найдено.");
+                    try {
+                        System.out.print("Введите номер животного, чтобы определить его вид: ");
+                        int index = Integer.parseInt(scanner.nextLine()) - 1;
+                        if (isValidIndex(index, counter)) {
+                            System.out.println("Вид животного: " + animals.get(index).getSpecies());
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Ошибка: " + e.getMessage());
                     }
-
 
                     break;
 
                 case 3:
-                    System.out.print("Введите номер животного, чтобы увидеть список команд: ");
-                    int index2 = Integer.parseInt(scanner.nextLine());
-
-                    if (animals[index2] != null) {
-                        System.out.println("Список команд для животного:");
-                        animals[index2].printCommands();
-                    } else {
-                        System.out.println("Ошибка: животное с таким номером не найдено.");
+                    try {
+                        System.out.print("Введите номер животного, чтобы увидеть список команд: ");
+                        int index2 = Integer.parseInt(scanner.nextLine()) - 1;
+                        if (isValidIndex(index2, counter)) {
+                            System.out.println("Список команд для животного:");
+                            animals.get(index2).printCommands();
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Ошибка: " + e.getMessage());
                     }
                     break;
 
                 case 4:
+                    try {
+                        System.out.print("Введите номер животного, чтобы обучить его новым командам: ");
+                        int index3 = Integer.parseInt(scanner.nextLine()) - 1;
 
-                    System.out.print("Введите номер животного, чтобы обучить его новым командам: ");
-                    int index3 = Integer.parseInt(scanner.nextLine());
+                        if (isValidIndex(index3, counter)) {
 
-                    if (animals[index3] != null) {
-                        System.out.print("Введите новую команду для животного: ");
-                        String command = scanner.nextLine();
+                            System.out.print("Введите новую команду для животного: ");
+                            String command = scanner.nextLine();
 
-                        animals[index3].addCommand(command);
+                            animals.get(index3).addCommand(command);
 
-                        System.out.println("Новая команда успешно добавлена!");
-                    } else {
-                        System.out.println("Ошибка: животное с таким номером не найдено.");
+                            System.out.println("Новая команда успешно добавлена!");
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Ошибка: " + e.getMessage());
                     }
                     break;
 

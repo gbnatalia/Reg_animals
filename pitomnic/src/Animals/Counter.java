@@ -5,14 +5,14 @@ public class Counter {
     private int MyCounter;
 
     public Counter() {
-        this.MyCounter = 0;
+        MyCounter = 0;
     }
 
     public void add(){
-        this.MyCounter++;
+        MyCounter++;
     }
 
     public int value(){
-        return this.MyCounter;
+        return MyCounter;
     }
 }
